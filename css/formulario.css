@@ -1,0 +1,56 @@
+.formulario {
+    padding: 2%;
+    background: #005153ad;
+    border-radius: 10px;
+    color: #EEE;
+}
+
+
+.form-group {
+    margin-bottom: 0.6rem;
+}
+
+.check-terminos {
+    text-align: center;
+}
+
+a {
+    color: #EEE;
+}
+
+a:hover {
+    cursor: pointer ;
+    color: #a08258;
+}
+
+.form-btn {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+}
+
+.btn-conect {
+    color: #EEE;
+    background-color: #20396f;
+    border-color: #20396f;
+}
+
+.btn-conect:hover {
+    color: #a08258;
+}
+
+
+.input_error input {
+    background-color: rgb(251,154,154,0.73);
+}
+
+.input_error input::placeholder {
+    color: #EEE;
+}
+
+.input_error span {
+    font-size: 13px;
+    padding: 2%;
+}
+
+
