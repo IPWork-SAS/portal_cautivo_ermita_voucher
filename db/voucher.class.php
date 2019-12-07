@@ -25,6 +25,16 @@
             }          
         }
 
+        public function validateExistVoucher($num_voucher = '') {
+            $voucher = $this::retrieveByvoucher($num_voucher, Orm::FETCH_ONE); 
+
+            if(isset($voucher)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         function getDatetimeNow() {
             $tz_object = new DateTimeZone('America/Bogota');
             //date_default_timezone_set('Brazil/East');
