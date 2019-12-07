@@ -54,7 +54,7 @@
     }     
 
     /* Valida si el voucher es correcto */
-    if (!$voucher->validateVoucher($num_voucher)) {
+    if (!$voucher->validateExistVoucher($num_voucher)) {
         $errorMSGVoucher =  $lang['error_voucher'];
         $errorVoucher = true;
     } 
