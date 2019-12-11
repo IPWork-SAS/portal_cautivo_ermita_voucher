@@ -86,46 +86,31 @@
                     <div class="container-carrusel">
                         <div class="slider carrousel">
                             <div class="banner-img">
-                                <img                                
-                                srcset="../img/banner_1_movil.jpg 450w,
-                                        ../img/banner_1_web.jpg 900w"
-                                sizes= "(max-width: 320px) 280px,                                
-                                        (max-width: 480px) 370px,
-                                        900px"
-                                src="../img/banner_1_web.jpg"
-                                alt="">
+                                <picture>
+                                    <source srcset="../img/banner_1_web.jpg" media="(min-width: 800px)" />                                
+                                    <img src="../img/banner_1_movil.jpg" />
+                                </picture>
+                                
                             </div>
                             <div class="banner-img">
-                                <img                                
-                                    srcset="../img/banner_2_movil.jpg 450w,
-                                            ../img/banner_2_web.jpg 900w"
-                                    sizes= "(max-width: 320px) 280px,                                    
-                                            (max-width: 480px) 370px,
-                                            900px"
-                                    src="../img/banner_2_web.jpg"
-                                    alt="">
+                                <picture>
+                                    <source srcset="../img/banner_2_web.jpg" media="(min-width: 800px)" />                                
+                                    <img src="../img/banner_2_movil.jpg" />
+                                </picture>
                             </div>
                                 
                             <div class="banner-img">
-                                <img                                
-                                    srcset="../img/banner_3_movil.jpg 450w,
-                                            ../img/banner_3_web.jpg 900w"
-                                    sizes= "(max-width: 320px) 280px,                                    
-                                            (max-width: 480px) 370px,
-                                            900px"
-                                    src="../img/banner_3_web.jpg"
-                                    alt="">
+                                <picture>
+                                    <source srcset="../img/banner_3_web.jpg" media="(min-width: 800px)" />                                
+                                    <img src="../img/banner_3_movil.jpg" />
+                                </picture>
                             </div>                              
                            
                             <div class="banner-img">
-                                <img                                
-                                        srcset="../img/banner_4_movil.jpg 450w,
-                                                ../img/banner_4_web.jpg 900w"
-                                        sizes= "(max-width: 320px) 280px,                                        
-                                                (max-width: 480px) 370px,
-                                                900px"
-                                        src="../img/banner_4_web.jpg"
-                                        alt="">
+                                <picture>
+                                        <source srcset="../img/banner_4_web.jpg" media="(min-width: 800px)" />                                
+                                        <img src="../img/banner_4_movil.jpg" />
+                                    </picture>
                             </div>
                         </div>
                     </div>
