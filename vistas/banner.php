@@ -86,34 +86,46 @@
                     <div class="container-carrusel">
                         <div class="slider carrousel">
                             <div class="banner-img">
-                                <img
-                                sizes="(min-width: 400px) 80vw, 100vw"
-                                srcset="../img/banner_1_movil.jpg 375w,
-                                        ../img/banner_1_web.jpg 1500w"
+                                <img                                
+                                srcset="../img/banner_1_movil.jpg 450w,
+                                        ../img/banner_1_web.jpg 900w"
+                                sizes= "(max-width: 320px) 280px,                                
+                                        (max-width: 480px) 370px,
+                                        900px"
+                                src="../img/banner_1_web.jpg"
                                 alt="">
                             </div>
                             <div class="banner-img">
-                                <img
-                                sizes="(min-width: 400px) 80vw, 100vw"
-                                srcset="../img/banner_2_movil.jpg 375w,
-                                        ../img/banner_2_web.jpg 1500w"
-                                alt="">
+                                <img                                
+                                    srcset="../img/banner_2_movil.jpg 450w,
+                                            ../img/banner_2_web.jpg 900w"
+                                    sizes= "(max-width: 320px) 280px,                                    
+                                            (max-width: 480px) 370px,
+                                            900px"
+                                    src="../img/banner_2_web.jpg"
+                                    alt="">
                             </div>
                                 
                             <div class="banner-img">
-                                <img
-                                sizes="(min-width: 400px) 80vw, 100vw"
-                                srcset="../img/banner_3_movil.jpg 375w,
-                                        ../img/banner_3_web.jpg 1500w"
-                                alt="">
+                                <img                                
+                                    srcset="../img/banner_3_movil.jpg 450w,
+                                            ../img/banner_3_web.jpg 900w"
+                                    sizes= "(max-width: 320px) 280px,                                    
+                                            (max-width: 480px) 370px,
+                                            900px"
+                                    src="../img/banner_3_web.jpg"
+                                    alt="">
                             </div>                              
                            
                             <div class="banner-img">
-                                <img
-                                sizes="(min-width: 400px) 80vw, 100vw"
-                                srcset="../img/banner_4_movil.jpg 375w,
-                                        ../img/banner_4_web.jpg 1500w"
-                                alt="">
+                                <img                                
+                                        srcset="../img/banner_4_movil.jpg 450w,
+                                                ../img/banner_4_web.jpg 900w"
+                                        sizes= "(max-width: 320px) 280px,                                        
+                                                (max-width: 480px) 370px,
+                                                900px"
+                                        src="../img/banner_4_web.jpg"
+                                        alt="">
                             </div>
                         </div>
                     </div>

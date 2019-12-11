@@ -135,7 +135,29 @@ html, body {
         width: 350px;
         margin: 1%;
     } 
+    .logo {
+        margin-top: 5px;
+    }
 }
+
+/* @media (min-height: 240px) {
+    .container {
+        max-width: 300px;
+    }
+
+    .logo {
+        margin-top: 5px;
+    }
+
+    .icono-idioma img {
+        width: 1.5rem;
+    }
+
+    .logo img {
+        width: 150px;
+        margin: 1%;
+    } 
+} */
 
 
 

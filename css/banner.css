@@ -1,6 +1,5 @@
 
 .banner-img img {
-    width: 100%;
     border-radius: 5px;
 }
 
@@ -40,6 +39,8 @@
 .slick-next {
     right: 2%;
 }
+
+
 
 
 
