@@ -93,7 +93,7 @@
         $campania = new Campania;
         $campania->nombre = $nombre;
         $campania->apellidos = $apellidos;
-        $campania->id_evento = 2;
+        $campania->id_evento = 14;
         $campania->fecha_creacion = getDatetimeNow();
         $campania->num_habitacion = $num_habitacion;
         $campania->num_voucher = $num_voucher;
