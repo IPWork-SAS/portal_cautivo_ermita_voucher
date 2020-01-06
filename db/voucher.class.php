@@ -4,7 +4,7 @@
     class Voucher extends Orm {
 
         protected static    
-            $database = 'portal_oxohotel_vouchers',
+            $database = 'portal_oxohotel',
             $table = 'vouchers',
             $pk = 'id_voucher';
         
