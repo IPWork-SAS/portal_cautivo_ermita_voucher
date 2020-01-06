@@ -2,5 +2,5 @@
     host = "localhost"
     port = ""
     user = "root"
-    password = "IPwork2019."
+    password = ""
     name = "portal_cautivo_habitaciones" 

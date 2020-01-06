@@ -30,6 +30,7 @@
         "error_apellidos" => "El campo apellidos es obligatorio",
         "error_num_habitacion" => "El numero de habitacion no existe",
         "error_voucher" => "El pin es invalido",
+        "error_voucher_usos" => "El pin ha excedido el número de usos",
         "error_aceptar_terminos" => "Es obligatorio aceptar los terminos y condiciones"
     );
 ?>

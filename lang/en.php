@@ -30,6 +30,7 @@
         "error_apellidos" => "The last name field is mandatory",
         "error_num_habitacion" => "The room number does not exist",
         "error_voucher" => "The pin is invalid",
+        "error_voucher_usos" => "The pin exceed the number of uses",
         "error_aceptar_terminos" => "It is mandatory to accept the terms and conditions"
     );
 ?>

@@ -18,6 +18,7 @@
     $os = isset($_POST['os']) ? $_POST['os'] : "Otro";  
     $lang = isset($_POST['lang']) ? $_POST['lang'] : "es"; 
 
+
     include_once("../lang/{$lang}.php"); 
 
     $voucher = new Voucher();
@@ -57,8 +58,12 @@
     if (!$voucher->validateExistVoucher($num_voucher)) {
         $errorMSGVoucher =  $lang['error_voucher'];
         $errorVoucher = true;
-    } 
+    }
 
+    if ($voucher->validateUsesVoucher($num_voucher)) {
+        $errorMSGVoucher =  $lang['error_voucher_usos'];
+        $errorVoucher = true;
+    } 
     // Valida si el check de terminos y condiciones
     if($check == 'false') {
         $errorMSGCheck =  $lang['error_aceptar_terminos'];
@@ -71,7 +76,19 @@
         $mac_ap = isset($_SESSION['mac_ap']) ? trim($_SESSION['mac_ap']) : "";  
         $mac_cliente = isset($_SESSION['mac_cliente']) ? trim($_SESSION['mac_cliente']) : "";  
         $ip_cliente = isset($_SESSION['ip_cliente']) ? trim($_SESSION['ip_cliente']) : "";  
-        $ssid = isset($_SESSION['ssid']) ? trim($_SESSION['ssid']) : "";  
+        $ssid = isset($_SESSION['ssid']) ? trim($_SESSION['ssid']) : "";
+        
+        $voucher = Voucher::retrieveByvoucher($num_voucher, Orm::FETCH_ONE);
+
+        // if($voucher->num_usos <= 0){
+        //     $voucher->num_usos = 0;
+           
+        // }
+        if($voucher->num_usos > 0){
+            $voucher->num_usos= $voucher->num_usos-1;
+            $voucher->estado = 'En Uso';
+            $voucher->save();
+        }
         
         $campania = new Campania;
         $campania->nombre = $nombre;
