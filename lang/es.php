@@ -29,7 +29,7 @@
         "error_nombre" => "El campo nombre es obligatorio",
         "error_nombre_longitud" => "El campo nombre debe tener mas de 3 caracteres",
         "error_apellidos" => "El campo apellidos es obligatorio",
-        "error_nombre_longitud" => "El campo nombre debe tener mas de 3 caracteres",
+        "error_apellidos_longitud" => "El campo nombre debe tener mas de 3 caracteres",
         "error_num_habitacion" => "El numero de habitacion no existe",
         "error_voucher" => "El pin es invalido",
         "error_voucher_usos" => "El pin ha excedido el número de usos",
