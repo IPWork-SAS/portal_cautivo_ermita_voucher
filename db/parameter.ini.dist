@@ -1,6 +1,6 @@
 [database]
     host = "localhost"
     port = ""
-    user = "ipfi"
+    user = "root"
     password = "IPwork2019."
     name = "portal_cautivo_habitaciones" 
