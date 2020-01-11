@@ -29,6 +29,9 @@ $(document).ready(function() {
     $('#submit').click(function(e){
         e.preventDefault();
 
+        submitButton = document.getElementById('submit');
+        submitButton.disabled = true;
+
         var nombre = $("#nombre").val();
         var apellidos = $("#apellidos").val();
         var num_habitacion = $("#num_habitacion").val();
@@ -54,6 +57,7 @@ $(document).ready(function() {
                 if (data.code == "200"){
                     window.location = '../vistas/banner.php';
                 } else {
+                    submitButton.disabled = false;
                     if (data.errorHabitacion) {
                         setErrorHabitacion(data);
                     }
@@ -220,6 +224,11 @@ function maxLengthCheck(object)
 
 function validate() {
     var element = document.getElementById('nombre');
+    element.value = element.value.replace(/[^a-zA-Z0\s]+/, '');
+};
+
+function validateApellidos() {
+    var element = document.getElementById('apellidos');
     element.value = element.value.replace(/[^a-zA-Z0\s]+/, '');
 };
 

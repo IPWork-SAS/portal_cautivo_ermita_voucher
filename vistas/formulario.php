@@ -65,7 +65,7 @@
                                 <span id="errorMSGNombre"></span>
                             </div>
                             <div class="form-group col-md-6" name="form_group_apellidos" id="form_group_apellidos">
-                                <input type="text" autocomplete="off" required onkeyup="validate();" class="form-control form-control-sm" id="apellidos" name="apellidos" onfocus="restaurarInputApellidos()" placeholder="<?= $lang['apellidos_form'];?>">
+                                <input type="text" autocomplete="off" required onkeyup="validateApellidos();" class="form-control form-control-sm" id="apellidos" name="apellidos" onfocus="restaurarInputApellidos()" placeholder="<?= $lang['apellidos_form'];?>">
                                 <span id="errorMSGApellidos"></span>
                             </div>
                         </div>

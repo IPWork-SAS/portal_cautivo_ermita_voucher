@@ -40,13 +40,23 @@
     if(empty($nombre)) {
         $errorMSGNombre =  $lang['error_nombre'];
         $errorNombre = true; 
+    } else {
+        if(strlen($nombre) < 3){
+            $errorMSGNombre =  $lang['error_nombre_longitud'];
+            $errorNombre = true; 
+        }
     }
 
     //Valida si el campo apellidos no es vacio
     if(empty($apellidos)) {
         $errorMSGApellidos =  $lang['error_apellidos'];
         $errorApellidos = true; 
-    }    
+    } else {
+        if(strlen($apellidos) < 3){
+            $errorMSGApellidos =  $lang['error_apellidos_longitud'];
+            $errorApellidos = true; 
+        }
+    }   
     
     /* Valida si la habitacion es correcta */
     if (!$habitacion->validateHabitacion($num_habitacion)) {
