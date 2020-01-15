@@ -17,8 +17,7 @@
     $formulario = new Formulario($_REQUEST);
     $datosFormulario = $formulario->GetDataForm();
 
-    if (!$datosFormulario->errorFormulario) {
-        
+    if (!$datosFormulario->errorFormulario) {        
         if ($formulario->SaveDataForm()) {
             echo json_encode(['code'=>200]);
             exit;
@@ -30,7 +29,7 @@
     } else {    
         echo json_encode([
             'code'=>404, 
-            'errorHabitacion'=>$datosFormulario->errorHabitacion, 
+            'errorHabitacion'=>isset($datosFormulario->errorHabitacion) ? $datosFormulario->errorHabitacion : '', 
             'errorNombre'=>$datosFormulario->errorNombre,
             'errorVoucher'=>$datosFormulario->errorVoucher, 
             'errorApellidos'=>$datosFormulario->errorApellidos,
@@ -42,5 +41,4 @@
             'errorMSGCheck' => !empty($datosFormulario->errorMSGCheck) ?$lang[$datosFormulario->errorMSGCheck] : ''           
         ]);
     }
-
 ?>
