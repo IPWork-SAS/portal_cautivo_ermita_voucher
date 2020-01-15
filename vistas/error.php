@@ -10,22 +10,11 @@
 
     include_once("../lang/{$lang}.php"); 
     
-    if (isset($_REQUEST['e'])) {
+    if (isset($_REQUEST['e']) && $_REQUEST['e'] != "") {
         $error_message_url = $_REQUEST['e'];
-        switch ($_REQUEST['e']) {          
-            case 'error_licencia':
-                $error_message = $lang['error_licencia'];
-                break;
-            case 'error_voucher':
-                $error_message = $lang['error_voucher_fecha'];
-                break;
-            
-            default:
-                $error_message = $lang['error_url'];
-                break;
-        }
+        $error_message = $lang[$error_message_url];
     } else {
-        $error_message = $lang['error_url'];
+        $error_message = $lang['error_default'];
     }
 ?>
 

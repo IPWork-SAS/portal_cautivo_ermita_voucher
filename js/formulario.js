@@ -28,11 +28,13 @@ $(document).ready(function() {
     //Submit evento
     $('#submit').click(function(e){
         e.preventDefault();
+        //submitButton = document.getElementById('submit');
+        //submitButton.disabled = true;
 
         var nombre = $("#nombre").val();
         var apellidos = $("#apellidos").val();
         var num_habitacion = $("#num_habitacion").val();
-        var voucher = $("#voucher").val();
+        var num_voucher = $("#num_voucher").val();
         var os =  $("#os").val();
         var lang =  $("#lang").val();
         var check = document.getElementById("gridCheck").checked;
@@ -45,7 +47,7 @@ $(document).ready(function() {
                 nombre:nombre, 
                 apellidos:apellidos, 
                 num_habitacion:num_habitacion, 
-                voucher:voucher,
+                num_voucher:num_voucher,
                 os: os,
                 check: check,
                 lang: lang
@@ -54,6 +56,7 @@ $(document).ready(function() {
                 if (data.code == "200"){
                     window.location = '../vistas/banner.php';
                 } else {
+                    //submitButton.disabled = false;
                     if (data.errorHabitacion) {
                         setErrorHabitacion(data);
                     }
@@ -140,7 +143,7 @@ function quitErrorVoucher() {
     var formGroupVoucher = document.getElementById("form_group_voucher");
     if (formGroupVoucher.classList.contains("input_error")) {
         formGroupVoucher.classList.remove("input_error");
-        var inputVoucher= document.getElementById("voucher");
+        var inputVoucher= document.getElementById("num_voucher");
         inputVoucher.value = "";
         var spanErrorVoucher = document.getElementById("errorMSGVoucher");
         if(spanErrorVoucher != null) {
@@ -218,9 +221,19 @@ function maxLengthCheck(object)
     object.value = object.value.slice(0, object.maxLength)
 };
 
-function validate() {
+function dropInvalidCharacteresNombre() {
     var element = document.getElementById('nombre');
     element.value = element.value.replace(/[^a-zA-Z0\s]+/, '');
+};
+
+function dropInvalidCharacteresApellidos() {
+    var element = document.getElementById('apellidos');
+    element.value = element.value.replace(/[^a-zA-Z0\s]+/, '');
+};
+
+function dropInvalidCharacteresHabitacion() {
+    var element = document.getElementById('num_habitacion');
+    element.value = element.value.replace(/[^0-9\s]+/, '');
 };
 
 
