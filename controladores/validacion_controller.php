@@ -18,7 +18,7 @@
             $user = $campania->getUserByMac($mac);
             if(isset($user)) {
                 $voucher = new Voucher();
-                if($voucher->validateVoucher($user->num_voucher) == 1) {
+                if($voucher->validateVoucher($user->num_voucher) === 1) {
                     return 'Location: vistas/banner.php';
                 } else {                
                     return 'Location: vistas/error.php?e=error_voucher';
