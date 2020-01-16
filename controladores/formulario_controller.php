@@ -103,7 +103,7 @@
         $campania = new Campania;
         $campania->nombre = $nombre;
         $campania->apellidos = $apellidos;
-        $campania->id_evento = 14;
+        $campania->id_evento = 2;
         $campania->fecha_creacion = getDatetimeNow();
         $campania->num_habitacion = $num_habitacion;
         $campania->num_voucher = $num_voucher;
@@ -142,7 +142,7 @@
     
         $datetime = new DateTime();
         $datetime->setTimezone($tz_object);
-        return $datetime->format('Y\-m\-d\ h:i:s');
+        return $datetime->format('Y\-m\-d\ H:i:s');
     }
 
     function removeAccents($str) {
