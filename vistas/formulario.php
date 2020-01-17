@@ -65,7 +65,7 @@
                                 <span id="errorMSGNombre"></span>
                             </div>
                             <div class="form-group col-md-6" name="form_group_apellidos" id="form_group_apellidos">
-                                <input type="text" autocomplete="off" required onkeyup="validate();" class="form-control form-control-sm" id="apellidos" name="apellidos" onfocus="restaurarInputApellidos()" placeholder="<?= $lang['apellidos_form'];?>">
+                                <input type="text" autocomplete="off" required onkeyup="validateApellidos();" class="form-control form-control-sm" id="apellidos" name="apellidos" onfocus="restaurarInputApellidos()" placeholder="<?= $lang['apellidos_form'];?>">
                                 <span id="errorMSGApellidos"></span>
                             </div>
                         </div>
@@ -76,6 +76,15 @@
                         <div class="form-group" id="form_group_voucher" name="form_group_voucher">
                             <input type="text" required autocomplete="off" class="form-control form-control-sm" id="voucher" name="voucher" onfocus="restaurarInputVoucher()" placeholder="<?= $lang['voucher_form'];?>">
                             <span id="errorMSGVoucher"></span>
+                        </div>
+                        <div class="form-group" id="form_group_razon"  name="form_group_razon">
+                            <select required class="form-control form-control-sm" id="razon_visita" name="razon_visita" onfocus="restaurarInputRazonVisita()" ">
+                                <option value=''>Seleccione una razón de visita...</option>
+                                <option value='Trabajo'>Trabajo</option>
+                                <option value='Vacaciones'>Vacaciones</option>
+                                <option value='Otro'>Otro</option>
+                            </select>
+                            <span id="errorMSGRazonVisita"></span>
                         </div>
                         <div class="form-group check-terminos input_error" id="form_group_check" name="form_group_check">
                             <div class="form-check">

@@ -14,6 +14,7 @@
     $apellidos = isset($_REQUEST['apellidos']) ? strtolower(removeAccents(trim($_REQUEST['apellidos']))) : "";
     $num_habitacion = isset($_REQUEST['num_habitacion']) ? strtolower(removeAccents(trim($_REQUEST['num_habitacion']))) : "";
     $num_voucher = isset($_REQUEST['voucher']) ?  strtolower(removeAccents(trim($_REQUEST['voucher']))) : "";
+    $razon_visita = $_REQUEST['razon_visita'];
     $check = isset($_POST['check']) ? $_POST['check'] : false;  
     $os = isset($_POST['os']) ? $_POST['os'] : "Otro";  
     $lang = isset($_POST['lang']) ? $_POST['lang'] : "es"; 
@@ -27,10 +28,12 @@
     //Validacion elementos del formulario
     $errorMSGHabitacion = "";
     $errorMSGVoucher = ""; 
+    $errorMSGRazonVisita = ""; 
     $errorMSGNombre = "";
     $errorMSGApellidos = "";
     $errorMSGCheck = "";
     $errorHabitacion = false;
+    $errorRazonVisita = false;
     $errorVoucher = false;
     $errorNombre = false;
     $errorApellidos = false;
@@ -40,13 +43,29 @@
     if(empty($nombre)) {
         $errorMSGNombre =  $lang['error_nombre'];
         $errorNombre = true; 
+    } else {
+        if(strlen($nombre) < 3){
+            $errorMSGNombre =  $lang['error_nombre_longitud'];
+            $errorNombre = true; 
+        }
     }
 
     //Valida si el campo apellidos no es vacio
     if(empty($apellidos)) {
         $errorMSGApellidos =  $lang['error_apellidos'];
         $errorApellidos = true; 
-    }    
+    } else {
+        if(strlen($apellidos) < 3){
+            $errorMSGApellidos =  $lang['error_apellidos_longitud'];
+            $errorApellidos = true; 
+        }
+    }
+    
+    //valida si seleccionó una razón de visita
+    if(!$razon_visita) {
+        $errorMSGRazonVisita =  $lang['error_seleccione_opcion'];
+        $errorRazonVisita = true; 
+    }   
     
     /* Valida si la habitacion es correcta */
     if (!$habitacion->validateHabitacion($num_habitacion)) {
@@ -71,7 +90,7 @@
     }
     
 
-    if(empty($errorMSGVoucher) && empty($errorMSGHabitacion) && empty($errorMSGNombre) && empty($errorMSGApellidos) && empty($errorMSGCheck)) {
+    if(empty($errorMSGVoucher) && empty($errorMSGHabitacion) && empty($errorMSGNombre) && empty($errorMSGApellidos) && empty($errorMSGCheck) && empty($errorMSGRazonVisita)) {
         $ip_ap = isset($_SESSION['ip_ap']) ? trim($_SESSION['ip_ap']) : "";  
         $mac_ap = isset($_SESSION['mac_ap']) ? trim($_SESSION['mac_ap']) : "";  
         $mac_cliente = isset($_SESSION['mac_cliente']) ? trim($_SESSION['mac_cliente']) : "";  
@@ -103,6 +122,7 @@
         $campania->ip_cliente = $ip_cliente;
         $campania->mac_ap = $mac_ap;
         $campania->ip_ap = $ip_ap;
+        $campania->razon_visita = $razon_visita;
         
         $campania->save();
         echo json_encode(['code'=>200]);
@@ -115,6 +135,8 @@
         'code'=>404, 
         'errorHabitacion'=>$errorHabitacion, 
         'errorVoucher'=>$errorVoucher, 
+        'errorRazonVisita'=>$errorRazonVisita, 
+        'errorMSGRazonVisita'=>$errorMSGRazonVisita, 
         'errorMSGHabitacion'=>$errorMSGHabitacion, 
         'errorMSGVoucher'=>$errorMSGVoucher,
         'errorMSGNombre'=>$errorMSGNombre,

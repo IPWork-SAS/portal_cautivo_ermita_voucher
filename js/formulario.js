@@ -7,6 +7,9 @@ $(document).ready(function() {
     var errorVoucher = document.getElementById("errorMSGVoucher");
     errorVoucher.hidden = true;
 
+    var errorRazonVisita = document.getElementById("errorMSGRazonVisita");
+    errorRazonVisita.hidden = true;
+
     var errorNombre = document.getElementById("errorMSGNombre");
     errorNombre.hidden = true;
 
@@ -29,9 +32,13 @@ $(document).ready(function() {
     $('#submit').click(function(e){
         e.preventDefault();
 
+        submitButton = document.getElementById('submit');
+        submitButton.disabled = true;
+
         var nombre = $("#nombre").val();
         var apellidos = $("#apellidos").val();
         var num_habitacion = $("#num_habitacion").val();
+        var razon_visita = $("#razon_visita").val();
         var voucher = $("#voucher").val();
         var os =  $("#os").val();
         var lang =  $("#lang").val();
@@ -45,20 +52,26 @@ $(document).ready(function() {
                 nombre:nombre, 
                 apellidos:apellidos, 
                 num_habitacion:num_habitacion, 
+                razon_visita:razon_visita,
                 voucher:voucher,
                 os: os,
                 check: check,
                 lang: lang
             },
             success : function(data) {
+                console.log(data)
                 if (data.code == "200"){
                     window.location = '../vistas/banner.php';
                 } else {
+                    submitButton.disabled = false;
                     if (data.errorHabitacion) {
                         setErrorHabitacion(data);
                     }
                     if (data.errorVoucher) {
                         setErrorVoucher(data);
+                    }
+                    if (data.errorRazonVisita) {
+                        setErrorRazonVisita(data);
                     }
                     if (data.errorNombre) {
                         setErrorNombre(data);
@@ -94,6 +107,17 @@ function setErrorVoucher(data) {
     spanErrorVoucher.textContent = data.errorMSGVoucher;
     var formGroupVoucher = document.getElementById("form_group_voucher");
     formGroupVoucher.classList.add("input_error");
+}
+
+function setErrorRazonVisita(data) {
+    var spanErrorRazonVisita = document.getElementById("errorMSGRazonVisita");
+    spanErrorRazonVisita.hidden = false;
+    spanErrorRazonVisita.textContent = data.errorMSGRazonVisita;
+    var formGroupRazonVisita = document.getElementById("form_group_razon");
+    var formGroupRazonVisita1 = document.getElementById("razon_visita");
+    formGroupRazonVisita.classList.add("input_error");
+    formGroupRazonVisita1.style.backgroundColor="#fb9a9aba";
+    formGroupRazonVisita1.style.color="white";
 }
 
 function setErrorNombre(data) {
@@ -150,6 +174,23 @@ function quitErrorVoucher() {
     }
 }
 
+function quitErrorRazonVisita() {
+    var formGroupVoucher = document.getElementById("form_group_razon");
+    var formGroupVoucher1 = document.getElementById("razon_visita");
+    formGroupVoucher1.style.backgroundColor="white";
+    formGroupVoucher1.style.color="#495057";
+    if (formGroupVoucher.classList.contains("input_error")) {
+        formGroupVoucher.classList.remove("input_error");
+        var inputVoucher= document.getElementById("razon_visita");
+        inputVoucher.value = "";
+        var spanErrorVoucher = document.getElementById("errorMSGRazonVisita");
+        if(spanErrorVoucher != null) {
+            spanErrorVoucher.hidden = true;
+            spanErrorVoucher.textContent = "";
+        }  
+    }
+}
+
 
 function quitErrorNombre() {
     var formGroupNombre = document.getElementById("form_group_nombre");
@@ -199,6 +240,9 @@ function restaurarInputHabitacion() {
 function restaurarInputVoucher() {
     quitErrorVoucher();
 }
+function restaurarInputRazonVisita() {
+    quitErrorRazonVisita();
+}
 
 function restaurarInputNombre() {
     quitErrorNombre();
@@ -220,6 +264,11 @@ function maxLengthCheck(object)
 
 function validate() {
     var element = document.getElementById('nombre');
+    element.value = element.value.replace(/[^a-zA-Z0\s]+/, '');
+};
+
+function validateApellidos() {
+    var element = document.getElementById('apellidos');
     element.value = element.value.replace(/[^a-zA-Z0\s]+/, '');
 };
 

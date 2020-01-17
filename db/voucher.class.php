@@ -25,8 +25,9 @@
         }
 
         public function validateExistVoucher($num_voucher = '') {
-            $voucher = $this::retrieveByvoucher($num_voucher, Orm::FETCH_ONE); 
-            if(isset($voucher)) {
+            $voucher = $this::retrieveByvoucher($num_voucher, Orm::FETCH_ONE);
+        
+            if(isset($voucher) && $voucher->id_campania == 1) {
                 return true;
             }
             else {

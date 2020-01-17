@@ -27,10 +27,13 @@
         "bienvenido_usuario" => "Welcome ",
         //Validaciones Formulario
         "error_nombre" => "The name field is mandatory",
+        "error_nombre_longitud" => "El campo nombre debe tener mas de 3 caracteres",
         "error_apellidos" => "The last name field is mandatory",
+        "error_apellidos_longitud" => "El campo apellidos debe tener mas de 3 caracteres",
         "error_num_habitacion" => "The room number does not exist",
         "error_voucher" => "The pin is invalid",
         "error_voucher_usos" => "The pin exceed the number of uses",
-        "error_aceptar_terminos" => "It is mandatory to accept the terms and conditions"
+        "error_aceptar_terminos" => "It is mandatory to accept the terms and conditions",
+        "error_seleccione_opcion" => "The reason of the visit is mandatory"
     );
 ?>
