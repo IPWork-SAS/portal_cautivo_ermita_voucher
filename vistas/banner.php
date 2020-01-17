@@ -80,7 +80,7 @@
             <div class="col-sm-12 my-auto">
                 <div class="card"> 
                     <div class="logo">
-                        <img src="../img/logo_1.png" alt="">
+                        <img class="img-logo" src="../img/logo.png" alt="">
                         <p><?=$lang['bienvenido_usuario'].$nombre.'!'?></p>
                     </div>
                     <div class="container-carrusel">
@@ -97,20 +97,6 @@
                                     <source srcset="../img/banner_2_web.jpg" media="(min-width: 800px)" />                                
                                     <img src="../img/banner_2_movil.jpg" />
                                 </picture>
-                            </div>
-                                
-                            <div class="banner-img">
-                                <picture>
-                                    <source srcset="../img/banner_3_web.jpg" media="(min-width: 800px)" />                                
-                                    <img src="../img/banner_3_movil.jpg" />
-                                </picture>
-                            </div>                              
-                           
-                            <div class="banner-img">
-                                <picture>
-                                        <source srcset="../img/banner_4_web.jpg" media="(min-width: 800px)" />                                
-                                        <img src="../img/banner_4_movil.jpg" />
-                                    </picture>
                             </div>
                         </div>
                     </div>

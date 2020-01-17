@@ -95,6 +95,30 @@
                     $this->dataFormulario['num_voucher'] = $num_voucher;
                     $this->ValidateVoucher($num_voucher);
                 }
+                if ($key == 'email') {
+                    array_push($this->arrayElementsForm, $key);
+                    $email = strtolower($this->utilidades->removeAccents(trim($value)));
+                    $this->dataFormulario['email'] = $email;
+                    $this->ValidateEmail($email);
+                }
+                if ($key == 'edad') {
+                    array_push($this->arrayElementsForm, $key);
+                    $edad = $value;
+                    $this->dataFormulario['edad'] = $edad;
+                    $this->ValidateEdad($edad);
+                }
+                if ($key == 'telefono') {
+                    array_push($this->arrayElementsForm, $key);
+                    $telefono = $value;
+                    $this->dataFormulario['telefono'] = $telefono;
+                    $this->ValidateTelefono($telefono);
+                }
+                if ($key == 'genero') {
+                    array_push($this->arrayElementsForm, $key);
+                    $genero = $value;
+                    $this->dataFormulario['genero'] = $genero;
+                    $this->ValidateGenero($genero);
+                }
                 if ($key == 'os') {  
                     array_push($this->arrayElementsForm, $key);                  
                     $os = $value;
@@ -204,9 +228,83 @@
 
             $this->dataFormulario['num_voucher'] = $num_voucher;             
         }
-    
-        function ValidateTerminosCondiciones($check) {       
 
+        function ValidateEmail($email) {                  
+            if(empty($email)) {
+                $this->dataFormulario['errorMSGEmail'] =  'error_email_vacio';
+                $this->dataFormulario['errorEmail'] = true;
+                $this->dataFormulario['errorFormulario'] = true;
+            } else {
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $this->dataFormulario['errorMSGEmail'] =  'error_email_estructura';
+                    $this->dataFormulario['errorEmail'] = true;
+                    $this->dataFormulario['errorFormulario'] = true;
+                } else {
+                    $this->dataFormulario['errorMSGEmail'] = '';
+                    $this->dataFormulario['errorEmail'] = false;
+                }  
+            }           
+
+            $this->dataFormulario['email'] = $email;             
+        }
+
+        function ValidateTelefono($telefono) {                  
+            if(empty($telefono)) {
+                $this->dataFormulario['errorMSGTelefono'] =  'error_telefono_vacio';
+                $this->dataFormulario['errorTelefono'] = true;
+                $this->dataFormulario['errorFormulario'] = true;
+            } else {
+                if (strlen($telefono) < 10) {
+                    $this->dataFormulario['errorMSGTelefono'] =  'error_telefono_min_longitud';
+                    $this->dataFormulario['errorTelefono'] = true;
+                    $this->dataFormulario['errorFormulario'] = true;
+                } else if (strlen($telefono) > 13) {
+                    $this->dataFormulario['errorMSGTelefono'] =  'error_telefono_max_longitud';
+                    $this->dataFormulario['errorTelefono'] = true;
+                    $this->dataFormulario['errorFormulario'] = true;
+                } else {
+                    $this->dataFormulario['errorMSGTelefono'] = '';
+                    $this->dataFormulario['errorTelefono'] = false;
+                }  
+            }          
+
+            $this->dataFormulario['telefono'] = $telefono;             
+        }
+
+        function ValidateEdad($edad) {                  
+            if(empty($edad)) {
+                $this->dataFormulario['errorMSGEdad'] =  'error_edad_vacio';
+                $this->dataFormulario['errorEdad'] = true;
+                $this->dataFormulario['errorFormulario'] = true;
+            } else {
+                if ((int)($edad) < 18) {
+                    $this->dataFormulario['errorMSGEdad'] =  'error_edad_min';
+                    $this->dataFormulario['errorEdad'] = true;
+                    $this->dataFormulario['errorFormulario'] = true;
+                } else {
+                    $this->dataFormulario['errorMSGEdad'] = '';
+                    $this->dataFormulario['errorEdad'] = false;
+                }  
+            }         
+
+            $this->dataFormulario['edad'] = $edad;             
+        }
+
+        function ValidateGenero($genero) {                  
+            if(empty($genero)) {
+                $this->dataFormulario['errorMSGGenero'] =  'error_genero_vacio';
+                $this->dataFormulario['errorGenero'] = true;
+                $this->dataFormulario['errorFormulario'] = true;
+            } else {
+                $this->dataFormulario['errorMSGGenero'] = '';
+                $this->dataFormulario['errorGenero'] = false; 
+            }         
+
+            $this->dataFormulario['genero'] = $genero;             
+        }
+
+    
+        function ValidateTerminosCondiciones($check) {      
             if ($check == 'false') {
                 $this->dataFormulario['errorMSGCheck'] =  'error_terminos_condiciones';
                 $this->dataFormulario['errorCheck']  = true; 

@@ -56,7 +56,7 @@
             <div class="col-sm-12 my-auto">
                 <div class="card"> 
                     <div class="logo">
-                        <img src="../img/logo_1.png" alt="">
+                        <img class="img-logo" src="../img/logo.png" alt="">
                         <p><?= $lang['titulo_form'];?></p>
                     </div>
                     <form class="formulario"  action="">
@@ -69,11 +69,11 @@
                                 echo '
                                 <div class="form-row">
                                     <div class="form-group col-md-6" name="form_group_nombre" id="form_group_nombre">
-                                        <input type="text" required autocomplete="off" onkeyup="dropInvalidCharacteresNombre();" class="form-control form-control-sm" id="nombre" name="nombre" onfocus="restaurarInputNombre()" placeholder="'.$lang['nombre_form'].'">
+                                        <input type="text" required autocomplete="off" onkeyup="dropInvalidCharactersNombre();" class="form-control form-control-sm" id="nombre" name="nombre" onfocus="restaurarInputNombre()" placeholder="'.$lang['nombre_form'].'">
                                         <span id="errorMSGNombre"></span>
                                     </div>
                                     <div class="form-group col-md-6" name="form_group_apellidos" id="form_group_apellidos">
-                                        <input type="text" autocomplete="off" required onkeyup="dropInvalidCharacteresApellidos();" class="form-control form-control-sm" id="apellidos" name="apellidos" onfocus="restaurarInputApellidos()" placeholder="'.$lang['apellidos_form'].'">
+                                        <input type="text" autocomplete="off" required onkeyup="dropInvalidCharactersApellidos();" class="form-control form-control-sm" id="apellidos" name="apellidos" onfocus="restaurarInputApellidos()" placeholder="'.$lang['apellidos_form'].'">
                                         <span id="errorMSGApellidos"></span>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                             if (isset($datosCampania['email'])) {
                                 echo '
                                 <div class="form-group" id="form_group_email"  name="form_group_email">
-                                    <input type="email" required class="form-control form-control-sm" id="email" name="email" placeholder="'.$lang['email_form'].'">
+                                    <input type="email" required class="form-control form-control-sm" id="email" name="email" onfocus="restaurarInputEmail()" placeholder="'.$lang['email_form'].'">
                                     <span id="errorMSGEmail"></span>
                                 </div>
                                 ';
@@ -92,8 +92,17 @@
                             if (isset($datosCampania['telefono'])) {
                                 echo '
                                 <div class="form-group" id="form_group_telefono"  name="form_group_telefono">
-                                <input type="tel" class="form-control form-control-sm" id="telefono" name="telefono" placeholder="'.$lang['celular_form'].'" required>
+                                <input type="tel" onkeyup="dropInvalidCharactersTelefono()"  class="form-control form-control-sm" id="telefono" name="telefono" onfocus="restaurarInputTelefono()" placeholder="'.$lang['celular_form'].'" required>
                                     <span id="errorMSGTelefono"></span>
+                                </div>
+                                ';
+                            }
+                            // Se valida que exista el campo telefono en los datos de la campania, si existe se muestra el contenido html. 
+                            if (isset($datosCampania['edad'])) {
+                                echo '
+                                <div class="form-group" id="form_group_edad"  name="form_group_edad">
+                                    <input type="text" onkeyup="dropInvalidCharactersAge()" class="form-control form-control-sm" id="edad" name="edad" onfocus="restaurarInputEdad()" placeholder="'.$lang['edad_form'].'" maxlength = "2" required>
+                                    <span id="errorMSGEdad"></span>
                                 </div>
                                 ';
                             }
@@ -101,7 +110,7 @@
                             if (isset($datosCampania['genero'])) {
                                 echo '
                                 <div class="form-group" id="form_group_genero"  name="form_group_genero">
-                                    <select id="genero"  name="genero" class="form-control form-control-sm" required>
+                                    <select id="genero"  name="genero" class="form-control form-control-sm" required onfocus="restaurarInputGenero()">
                                         <option selected value="">'.$lang['seleccion_genero_form'].'</option>
                                         <option value="Hombre">'.$lang['masculino_genero_form'].'</option>
                                         <option value="Mujer">'.$lang['femenino_genero_form'].'</option>
@@ -115,7 +124,7 @@
                             if (isset($datosCampania['num_habitacion'])) {
                                 echo '
                                 <div class="form-group" id="form_group_habitacion"  name="form_group_habitacion">
-                                    <input type="text" required autocomplete="off" onkeyup="dropInvalidCharacteresHabitacion()" class="form-control form-control-sm" id="num_habitacion" name="num_habitacion" onfocus="restaurarInputHabitacion()" placeholder="'.$lang['num_habitacion_form'].'">
+                                    <input type="text" required autocomplete="off" onkeyup="dropInvalidCharactersHabitacion()" class="form-control form-control-sm" id="num_habitacion" name="num_habitacion" onfocus="restaurarInputHabitacion()" placeholder="'.$lang['num_habitacion_form'].'">
                                     <span id="errorMSGHabitacion"></span>
                                 </div>
                                 ';
@@ -130,15 +139,17 @@
                                 ';
                             }
                         ?>  
-                        <div class="form-group check-terminos input_error" id="form_group_check" name="form_group_check">
-                            <div class="form-check">
-                                <input class="form-check-input custom-control-input" type="checkbox" id="gridCheck" name="gridCheck"  required onclick="restaurarInputCheck()">
-                                <label class="form-check-label" for="gridCheck">
+
+                        <div class="form-group check-terminos" id="form_group_check" name="form_group_check">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitches" name="customSwitches" required onclick="restaurarInputCheck()">
+                                <label class="custom-control-label" for="customSwitches">
                                     <a href="#popup"><?= $lang['terminos_link'];?></a>
                                 </label>
                             </div>
                             <span id="errorMSGCheck"></span>
                         </div>
+
                         <div class="form-btn">
                             <button type="submit" id="submit" class="btn btn-conect"><?= $lang['btn_continuar'];?></button>
                         </div>                           

@@ -1,12 +1,13 @@
 <?php
     include_once 'db.class.php';    
     include_once '../clases/utilidades.class.php';
+    include_once 'config.php';
 
     class Campania extends Orm {
 
         protected static    
-            $database = 'portal_oxohotel',
-            $table = 'portal_cautivo_habitaciones',
+            $database = BD_PARAMETERS['database']['name'],
+            $table = BD_PARAMETERS['database']['campania'],
             $pk = 'id';           
 
 
@@ -43,6 +44,18 @@
             }
             if(isset($dataClient['apellidos'])) {
                 $this->apellidos = $dataClient['apellidos'];
+            }
+            if(isset($dataClient['email'])) {
+                $this->email = $dataClient['email'];
+            }
+            if(isset($dataClient['edad'])) {
+                $this->edad = $dataClient['edad'];
+            }
+            if(isset($dataClient['telefono'])) {
+                $this->telefono = $dataClient['telefono'];
+            }
+            if(isset($dataClient['genero'])) {
+                $this->genero = $dataClient['genero'];
             }
             if(isset($dataClient['num_habitacion'])) {
                 $this->num_habitacion = $dataClient['num_habitacion'];

@@ -21,9 +21,6 @@
     font-weight: 500;
     cursor: pointer;
     border-radius: 5px;
-    color: #EEE;
-    background-color: #20396f;
-    border-color: #20396f;
 }
 
 .btn-conectar:hover,
@@ -41,7 +38,18 @@
     right: 2%;
 }
 
+/* CLASES QUE CAMBIAN  */
 
+.btn-conectar {       
+    color: #EEE;
+    background-color: rgb(160,19,35,0.91);
+    border-color: #000000;
+}
 
+.btn-conectar:hover,
+.btn-conectar:focus {
+    background-color: rgb(190, 33, 50, 0.91);
+    color: #EEE;
+}
 
 

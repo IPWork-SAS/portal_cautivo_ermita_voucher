@@ -50,7 +50,7 @@
             <div class="col-sm-12 my-auto">
                 <div class="card"> 
                     <div class="logo">
-                        <img src="../img/logo_1.png" alt="">
+                        <img class="img-logo" src="../img/logo.png" alt="">
                         <p><?=$error_message?></p>
                     </div>
                 </div>

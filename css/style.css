@@ -74,12 +74,6 @@ html, body {
     margin-top: 20%;
 }
 
-
-.logo img {
-    width: 250px;
-    margin: 1%;
-}
-
 .logo p {
     font-size: 1.2rem;
     text-align: center;
@@ -131,36 +125,25 @@ html, body {
         width: 3rem;
     }
 
-    .logo img {
-        width: 350px;
-        margin: 1%;
-    } 
     .logo {
         margin-top: 5px;
     }
 }
 
-/* @media (min-height: 240px) {
-    .container {
-        max-width: 300px;
-    }
+/* CLASES MODIFICABLES */
 
-    .logo {
-        margin-top: 5px;
-    }
+.img-logo {
+    width: 120px;
+    margin: 1%;
+}
 
-    .icono-idioma img {
-        width: 1.5rem;
-    }
 
-    .logo img {
-        width: 150px;
+@media (min-width: 992px) {
+    .img-logo {
+        width: 200px;
         margin: 1%;
-    } 
-} */
-
-
-
+    }     
+}
 
 
 

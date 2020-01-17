@@ -3,4 +3,5 @@
     port = ""
     user = "root"
     password = "IPwork2019."
-    name = "portal_oxohotel" 
+    name = "unicentro" 
+    campania = "Coworking"

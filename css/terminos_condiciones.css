@@ -58,7 +58,8 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    padding: 4rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
     max-height: calc(100vh - 200px);
     overflow-y: auto;
   }

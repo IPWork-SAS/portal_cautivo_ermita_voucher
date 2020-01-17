@@ -14,7 +14,7 @@
         <div class="background"></div> 
         <div class="container-main">
             <div class="container-logo-portal">
-                <img src="../img/logo_1.png" alt="">
+                <img class="img-logo" src="../img/logo.png" alt="">
                 <h3>Conéctate y disfruta de nuestra red WIFI Gratis.</h3>
             </div>  
             <div class="container-form">

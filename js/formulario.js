@@ -1,77 +1,26 @@
 $(document).ready(function() {
 
-    //Variables iniciales
-    var errorHabitacion = document.getElementById("errorMSGHabitacion");
-    errorHabitacion.hidden = true;
-
-    var errorVoucher = document.getElementById("errorMSGVoucher");
-    errorVoucher.hidden = true;
-
-    var errorNombre = document.getElementById("errorMSGNombre");
-    errorNombre.hidden = true;
-
-    var errorApellidos = document.getElementById("errorMSGApellidos");
-    errorApellidos.hidden = true;
-
-    var errorCheck= document.getElementById("errorMSGCheck");
-    errorCheck.hidden = true;
-    
-    // Recoleccion sistema Operativo
-    var OSName="Otro";
-    if (navigator.appVersion.indexOf("Win")!=-1){ OSName="Windows" }
-    if (navigator.appVersion.indexOf("Mac")!=-1){ OSName="MacOS" }
-    if (navigator.appVersion.indexOf("X11")!=-1){ OSName="UNIX" }
-    if (navigator.appVersion.indexOf("Linux")!=-1){ OSName="Linux" }
-    if (navigator.appVersion.indexOf("Android")!=-1){ OSName="Android" }
-    $("#os").val(OSName);
-    
+    incializarVariables();
+    detectOperativeSystem();
     //Submit evento
     $('#submit').click(function(e){
         e.preventDefault();
         //submitButton = document.getElementById('submit');
         //submitButton.disabled = true;
 
-        var nombre = $("#nombre").val();
-        var apellidos = $("#apellidos").val();
-        var num_habitacion = $("#num_habitacion").val();
-        var num_voucher = $("#num_voucher").val();
-        var os =  $("#os").val();
-        var lang =  $("#lang").val();
-        var check = document.getElementById("gridCheck").checked;
+        dataForm = getDataForm();        
 
         $.ajax({
             type: "POST",
             url: "../controladores/formulario_controller.php",
             dataType: "json",
-            data: {
-                nombre:nombre, 
-                apellidos:apellidos, 
-                num_habitacion:num_habitacion, 
-                num_voucher:num_voucher,
-                os: os,
-                check: check,
-                lang: lang
-            },
+            data: dataForm,
             success : function(data) {
                 if (data.code == "200"){
                     window.location = '../vistas/banner.php';
                 } else {
                     //submitButton.disabled = false;
-                    if (data.errorHabitacion) {
-                        setErrorHabitacion(data);
-                    }
-                    if (data.errorVoucher) {
-                        setErrorVoucher(data);
-                    }
-                    if (data.errorNombre) {
-                        setErrorNombre(data);
-                    }
-                    if (data.errorApellidos) {
-                        setErrorApellidos(data);
-                    }
-                    if (data.errorCheck) {
-                        setErrorCheck(data);
-                    }
+                    setErrorForm(data);
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -82,6 +31,185 @@ $(document).ready(function() {
     
 })
 
+function setErrorForm(data) {
+    if (data.errorHabitacion != null) {
+        if (data.errorHabitacion) {
+            setErrorHabitacion(data);
+        }
+    }
+
+    if (data.errorVoucher != null) {
+        if (data.errorVoucher) {
+            setErrorVoucher(data);
+        }
+    }
+
+    if (data.errorNombre != null) {
+        if (data.errorNombre) {
+            setErrorNombre(data);
+        }
+    }
+
+    if (data.errorApellidos != null) {
+        if (data.errorApellidos) {
+            setErrorApellidos(data);
+        }
+    }
+
+    if (data.errorCheck != null) {
+        if (data.errorCheck) {
+            setErrorCheck(data);
+        }
+    }
+
+    if (data.errorEmail != null) {
+        if (data.errorEmail) {
+            setErrorEmail(data);
+        }
+    }
+
+    
+    if (data.errorEdad != null) {
+        if (data.errorEdad) {
+            setErrorEdad(data);
+        }
+    }
+
+    if (data.errorTelefono != null) {
+        if (data.errorTelefono) {
+            setErrorTelefono(data);
+        }
+    }
+    
+    if (data.errorGenero != null) {
+        if (data.errorGenero) {
+            setErrorGenero(data);
+        }
+    }  
+}
+
+function getDataForm() {
+    arrayDatosFormulario = {};
+
+    if (document.getElementById('nombre') != null) {
+        arrayDatosFormulario['nombre'] = $("#nombre").val();
+    }
+    if (document.getElementById('apellidos') != null) {
+        arrayDatosFormulario['apellidos'] = $("#apellidos").val();
+    }
+    if (document.getElementById('email') != null) {
+        arrayDatosFormulario['email'] = $("#email").val();
+    }
+    if (document.getElementById('telefono') != null) {
+        arrayDatosFormulario['telefono'] = $("#telefono").val();
+    }
+    if (document.getElementById('genero') != null) {
+        arrayDatosFormulario['genero'] = $("#genero").val();
+    }    
+    if (document.getElementById('num_habitacion') != null) {
+        arrayDatosFormulario['num_habitacion'] = $("#num_habitacion").val();
+    }
+    if (document.getElementById('num_voucher') != null) {
+        arrayDatosFormulario['num_voucher'] = $("#num_voucher").val();
+    }
+    if (document.getElementById('edad') != null) {
+        arrayDatosFormulario['edad'] = $("#edad").val();
+    }
+    if (document.getElementById('lang') != null) {
+        arrayDatosFormulario['lang'] = $("#lang").val();
+    }
+    if (document.getElementById('os') != null) {
+        arrayDatosFormulario['os'] = $("#os").val();
+    }
+    if (document.getElementById('customSwitches') != null) {
+        arrayDatosFormulario['check'] = $("#customSwitches").is(':checked');;
+    }
+
+    return arrayDatosFormulario;
+}
+
+function detectOperativeSystem() {
+    // Recoleccion sistema Operativo
+    var OSName="Otro";
+    if (navigator.appVersion.indexOf("Win")!=-1){ OSName="Windows" }
+    if (navigator.appVersion.indexOf("Mac")!=-1){ OSName="MacOS" }
+    if (navigator.appVersion.indexOf("X11")!=-1){ OSName="UNIX" }
+    if (navigator.appVersion.indexOf("Linux")!=-1){ OSName="Linux" }
+    if (navigator.appVersion.indexOf("Android")!=-1){ OSName="Android" }
+    $("#os").val(OSName);
+}
+
+function incializarVariables() {
+      //Variables iniciales
+      if (document.getElementById("errorMSGHabitacion") != null) {
+        var errorHabitacion = document.getElementById("errorMSGHabitacion");
+        errorHabitacion.hidden = true;    
+      } 
+      if (document.getElementById("errorMSGVoucher") != null) {        
+        var errorVoucher = document.getElementById("errorMSGVoucher");
+        errorVoucher.hidden = true;  
+      } 
+      if (document.getElementById("errorMSGNombre")) {
+        var errorNombre = document.getElementById("errorMSGNombre");
+        errorNombre.hidden = true;    
+      }
+      if (document.getElementById("errorMSGApellidos")) {
+        var errorApellidos = document.getElementById("errorMSGApellidos");
+        errorApellidos.hidden = true; 
+      }
+      if (document.getElementById("errorMSGEmail")) {
+        var errorEmail = document.getElementById("errorMSGEmail");
+        errorEmail.hidden = true; 
+      }
+      if (document.getElementById("errorMSGTelefono")) {
+        var errorTelefono = document.getElementById("errorMSGTelefono");
+        errorTelefono.hidden = true; 
+      }
+      if (document.getElementById("errorMSGEdad")) {
+        var errorEdad= document.getElementById("errorMSGEdad");
+        errorEdad.hidden = true;   
+      }
+      if (document.getElementById("errorMSGGenero")) {
+        var errorGenero = document.getElementById("errorMSGGenero");
+        errorGenero.hidden = true; 
+      }      
+      if (document.getElementById("errorMSGCheck")) {
+        var errorCheck= document.getElementById("errorMSGCheck");
+        errorCheck.hidden = true;   
+      }
+}
+
+function setErrorEmail(data) {
+    var spanErrorEmail = document.getElementById("errorMSGEmail");
+    spanErrorEmail.textContent = data.errorMSGEmail;
+    spanErrorEmail.hidden = false;
+    var formGroupEmail = document.getElementById("form_group_email");
+    formGroupEmail.classList.add("input_error");
+}
+
+function setErrorTelefono(data) {
+    var spanErrorTelefono = document.getElementById("errorMSGTelefono");
+    spanErrorTelefono.textContent = data.errorMSGTelefono;
+    spanErrorTelefono.hidden = false;
+    var formGroupTelefono = document.getElementById("form_group_telefono");
+    formGroupTelefono.classList.add("input_error");
+}
+
+function setErrorEdad(data) {
+    var spanErrorEdad = document.getElementById("errorMSGEdad");
+    spanErrorEdad.textContent = data.errorMSGEdad;
+    spanErrorEdad.hidden = false;
+    var formGroupEdad = document.getElementById("form_group_edad");
+    formGroupEdad.classList.add("input_error");
+}
+
+function setErrorGenero(data) {
+    var spanErrorGenero = document.getElementById("errorMSGGenero");
+    spanErrorGenero.textContent = data.errorMSGGenero;
+    spanErrorGenero.hidden = false;
+    var formGroupGenero= document.getElementById("form_group_genero");
+    formGroupGenero.classList.add("input_error");
+}
 
 function setErrorHabitacion(data) {
     var spanErrorHabitacion = document.getElementById("errorMSGHabitacion");
@@ -183,6 +311,63 @@ function quitErrorApellidos() {
     }
 }
 
+function quitErrorEdad() {
+    var formGroupEdad = document.getElementById("form_group_edad");
+    if (formGroupEdad.classList.contains("input_error")) {
+        formGroupEdad.classList.remove("input_error");
+        var inputEdad = document.getElementById("edad");
+        inputEdad.value = "";
+        var spanErrorEdad = document.getElementById("errorMSGEdad");
+        if(spanErrorEdad != null) {
+            spanErrorEdad.hidden = true;
+            spanErrorEdad.textContent = "";
+        }  
+    }
+}
+
+
+function quitErrorEmail() {
+    var formGroupEmail = document.getElementById("form_group_email");
+    if (formGroupEmail.classList.contains("input_error")) {
+        formGroupEmail.classList.remove("input_error");
+        var inputEmail = document.getElementById("email");
+        inputEmail.value = "";
+        var spanErrorEmail = document.getElementById("errorMSGEmail");
+        if(spanErrorEmail != null) {
+            spanErrorEmail.hidden = true;
+            spanErrorEmail.textContent = "";
+        }  
+    }
+}
+
+function quitErrorTelefono() {
+    var formGroupTelefono = document.getElementById("form_group_telefono");
+    if (formGroupTelefono.classList.contains("input_error")) {
+        formGroupTelefono.classList.remove("input_error");
+        var inputTelefono = document.getElementById("telefono");
+        inputTelefono.value = "";
+        var spanErrorTelefono = document.getElementById("errorMSGTelefono");
+        if(spanErrorTelefono != null) {
+            spanErrorTelefono.hidden = true;
+            spanErrorTelefono.textContent = "";
+        }  
+    }
+}
+
+function quitErrorGenero() {
+    var formGroupGenero = document.getElementById("form_group_genero");
+    if (formGroupGenero.classList.contains("input_error")) {
+        formGroupGenero.classList.remove("input_error");
+        var inputGenero = document.getElementById("genero");
+        inputGenero.value = "";
+        var spanErrorGenero = document.getElementById("errorMSGGenero");
+        if(spanErrorGenero != null) {
+            spanErrorGenero.hidden = true;
+            spanErrorGenero.textContent = "";
+        }  
+    }
+}
+
 function quitErrorCheck() {
     var formGroupCheck = document.getElementById("form_group_check");
     if (formGroupCheck.classList.contains("input_error")) {
@@ -193,6 +378,22 @@ function quitErrorCheck() {
             spanErrorCheck.textContent = "";
         }  
     }  
+}
+
+function restaurarInputEmail() {
+    quitErrorEmail();   
+}
+
+function restaurarInputTelefono() {
+    quitErrorTelefono();  
+}
+
+function restaurarInputEdad() {
+    quitErrorEdad();   
+}
+
+function restaurarInputGenero() {
+    quitErrorGenero();
 }
 
 function restaurarInputHabitacion() {
@@ -215,26 +416,30 @@ function restaurarInputCheck() {
     quitErrorCheck();
 }
 
-function maxLengthCheck(object)
-{
-    if (object.value.length > object.maxLength)
-    object.value = object.value.slice(0, object.maxLength)
-};
-
-function dropInvalidCharacteresNombre() {
+function dropInvalidCharactersNombre() {
     var element = document.getElementById('nombre');
     element.value = element.value.replace(/[^a-zA-Z0\s]+/, '');
 };
 
-function dropInvalidCharacteresApellidos() {
+function dropInvalidCharactersApellidos() {
     var element = document.getElementById('apellidos');
     element.value = element.value.replace(/[^a-zA-Z0\s]+/, '');
 };
 
-function dropInvalidCharacteresHabitacion() {
+function dropInvalidCharactersHabitacion() {
     var element = document.getElementById('num_habitacion');
     element.value = element.value.replace(/[^0-9\s]+/, '');
 };
+
+function dropInvalidCharactersAge() {
+    var element = document.getElementById('edad');
+    element.value = element.value.replace(/[^0-9\s]+/, '');
+}
+
+function dropInvalidCharactersTelefono() {
+    var element = document.getElementById('telefono');
+    element.value = element.value.replace(/[^0-9\s]+/, '');
+}
 
 
 
