@@ -12,11 +12,11 @@
         
             $voucher = $this::retrieveByvoucher($num_voucher, Orm::FETCH_ONE); 
 
-            $fecha_inicial = date('Y-m-d', strtotime($voucher->fecha_inicial));
-            $fecha_final = date('Y-m-d', strtotime($voucher->fecha_final));
+            $fecha_inicio = date('Y-m-d', strtotime($voucher->fecha_inicio));
+            $fecha_fin = date('Y-m-d', strtotime($voucher->fecha_fin));
             $fecha_hoy = $this->getDatetimeNow(); 
 
-            if (($fecha_hoy >= $fecha_inicial) && ($fecha_hoy <= $fecha_final)){
+            if (($fecha_hoy >= $fecha_inicio) && ($fecha_hoy <= $fecha_fin)){
                 return true;
             }
             else{
