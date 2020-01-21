@@ -1,5 +1,8 @@
 <?php
     include_once "../db/campania.class.php";
+    include_once "../db/files_campania.class.php";
+    include_once "../db/banner_files_campania.class.php";
+
     session_start();
 
     if (isset($_REQUEST['i'])) {
@@ -34,6 +37,9 @@
     } else {
         $nombre = 'a nuestra red WIFI';
     }
+
+    $fileCampania = new FilesCampania();
+    $bannerFilesCampania = new BannerFilesCampania(); 
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +66,11 @@
     
 
 </head>
+<style>
+    html {
+        background-image: url(<?=$fileCampania->GetSRCBackgroundImage()?>);
+    }    
+</style>
 <body>
     <div class="selector-idioma">
         <?php if ($lang['lang'] == 'es'){ ?>
@@ -80,24 +91,23 @@
             <div class="col-sm-12 my-auto">
                 <div class="card"> 
                     <div class="logo">
-                        <img class="img-logo" src="../img/logo.png" alt="">
+                        <img class="img-logo" src="<?=$fileCampania->GetSRCIconImageSRC()?>" alt="">
                         <p><?=$lang['bienvenido_usuario'].$nombre.'!'?></p>
                     </div>
                     <div class="container-carrusel">
                         <div class="slider carrousel">
-                            <div class="banner-img">
-                                <picture>
-                                    <source srcset="../img/banner_1_web.jpg" media="(min-width: 800px)" />                                
-                                    <img src="../img/banner_1_movil.jpg" />
-                                </picture>
-                                
-                            </div>
-                            <div class="banner-img">
-                                <picture>
-                                    <source srcset="../img/banner_2_web.jpg" media="(min-width: 800px)" />                                
-                                    <img src="../img/banner_2_movil.jpg" />
-                                </picture>
-                            </div>
+                            <?php
+                                foreach ($bannerFilesCampania->GetSRCBannerList() as $key => $value) {                                   
+                                    echo '
+                                        <div class="banner-img">
+                                            <picture>
+                                                <source srcset="'.$value->srcImgWeb.'" media="(min-width: 800px)" />                                
+                                                <img src="'.$value->srcImgMovil.'" />
+                                            </picture>                                            
+                                        </div>
+                                    ';
+                                }
+                            ?>
                         </div>
                     </div>
                     <form class="field-btn-conectar" action="<?= $url?>" method="POST">

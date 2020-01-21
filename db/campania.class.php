@@ -123,4 +123,13 @@
             } 
             return $datosCampania;
         }
+
+        public function GetIdCampania() {
+            $campania = $this::sql("SELECT* FROM campania where campania = ':table'");
+            if(isset($campania)) {
+                return $campania;
+            } else {
+                return '0';
+            }
+        }
     }

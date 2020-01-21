@@ -1,5 +1,6 @@
 <?php 
     include_once '../db/campania.class.php';
+    include_once '../db/files_campania.class.php';
 
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
@@ -15,7 +16,9 @@
     include_once("../lang/{$lang}.php");
     
     $campania = new Campania();
-    $datosCampania = $campania->GetDatosCampaña();   
+    $datosCampania = $campania->GetDatosCampaña();  
+    
+    $fileCampania = new FilesCampania(); 
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +38,11 @@
     <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
     
 </head>
+<style>
+    html {
+        background-image: url(<?=$fileCampania->GetSRCBackgroundImage()?>);
+    }    
+</style>
 <body>
     <div class="selector-idioma">
         <?php if ($lang['lang'] == 'es'){ ?>
@@ -55,8 +63,8 @@
         <div class="row h-100">
             <div class="col-sm-12 my-auto">
                 <div class="card"> 
-                    <div class="logo">
-                        <img class="img-logo" src="../img/logo.png" alt="">
+                    <div class="logo">                        
+                        <img class="img-logo" src="<?=$fileCampania->GetSRCIconImageSRC()?>" alt="">
                         <p><?= $lang['titulo_form'];?></p>
                     </div>
                     <form class="formulario"  action="">
