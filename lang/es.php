@@ -33,6 +33,8 @@
         "error_num_habitacion" => "El numero de habitacion no existe",
         "error_voucher" => "El pin es invalido",
         "error_voucher_usos" => "El pin ha excedido el número de usos",
+        "error_voucher_fechas" => "El pin ha caducado",
+        "error_voucher_fechaActivacion" => "El pin no ha llegado a la fecha de activacion",
         "error_aceptar_terminos" => "Es obligatorio aceptar los terminos y condiciones",
         "error_seleccione_opcion" => "La razón de la visita es obligatoria"
     );

@@ -1,6 +1,7 @@
 <?php 
     //Se llaman las librerias y clases necesarias
     include_once "../db/campania.class.php";
+    include_once "../db/campanias.class.php";
     include_once "../db/voucher.class.php";
     include_once "../db/habitacion.class.php";
 
@@ -82,6 +83,11 @@
     if ($voucher->validateUsesVoucher($num_voucher)) {
         $errorMSGVoucher =  $lang['error_voucher_usos'];
         $errorVoucher = true;
+    }
+
+    if ($voucher->validateVoucher($num_voucher)) {
+        $errorMSGVoucher =  $lang['error_voucher_fechas'];
+        $errorVoucher = true;
     } 
     // Valida si el check de terminos y condiciones
     if($check == 'false') {
@@ -99,14 +105,45 @@
         
         $voucher = Voucher::retrieveByvoucher($num_voucher, Orm::FETCH_ONE);
 
-        // if($voucher->num_usos <= 0){
-        //     $voucher->num_usos = 0;
-           
-        // }
-        if($voucher->num_usos > 0){
-            $voucher->num_usos= $voucher->num_usos-1;
-            $voucher->estado = 'En Uso';
-            $voucher->save();
+        if($voucher->num_usos == $voucher->total_num_usos){
+            $voucher->num_usos = $voucher->total_num_usos;
+        }
+        
+        if(($voucher->id_campania == 2 && $voucher->id_locacion==1) &&($voucher->num_usos >= 0 && $voucher->num_usos != $voucher->total_num_usos)){
+            if($voucher->id_caducidad == 3 && $voucher->estado == 'Sin Uso'){
+                $daysActive = $voucher->dias_disponibles;
+                $hoursActive = $voucher->horas_disponibles;
+                $minutesActive = $voucher->minutos_disponibles;
+                
+                date_default_timezone_set('America/Bogota');
+                // se toma la fecha fin de la campaña 2 en este caso habitaciones
+                $campaings = new Campanias();
+                $campaing = $campaings->getCampaing(2);
+                $fecha_finCampania = date('Y-m-d 00:00:00', strtotime($campaing->fecha_fin));
+
+                $startDateActive = date("Y-m-d H:i:s");
+                $endDateActive = date('Y-m-d H:i:s',strtotime("+$daysActive day +$hoursActive hour +$minutesActive minutes",strtotime($startDateActive)));
+
+                if($endDateActive > $fecha_finCampania){
+                    $voucher->fecha_inicio = $startDateActive;
+                    $voucher->fecha_fin = $fecha_finCampania;
+                    $voucher->num_usos = $voucher->num_usos+1;
+                    $voucher->estado = 'En Uso';
+                    $voucher->save();
+                }
+                if($endDateActive <= $fecha_finCampania){
+                    $voucher->fecha_inicio = $startDateActive;
+                    $voucher->fecha_fin = $endDateActive;
+                    $voucher->num_usos = $voucher->num_usos+1;
+                    $voucher->estado = 'En Uso';
+                    $voucher->save();
+                }
+                
+            }else{
+                $voucher->num_usos = $voucher->num_usos+1;
+                $voucher->estado = 'En Uso';
+                $voucher->save();
+            }
         }
         
         $campania = new Campania;
